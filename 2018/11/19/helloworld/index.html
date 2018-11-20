@@ -100,7 +100,7 @@
 
   
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css" />
 
@@ -153,7 +153,7 @@
 
 
   <meta name="description" content="# hellohhelloworld">
-<meta name="keywords" content="“java,spring,spring boot,spring cloud,微服务,分布式,大数据”">
+<meta name="keywords" content="“shiyajian,史亚健,java,spring,spring boot,spring cloud,微服务,分布式,大数据”">
 <meta property="og:type" content="article">
 <meta property="og:title" content="helloworld">
 <meta property="og:url" content="http://shiyajian.github.io/2018/11/19/helloworld/index.html">
@@ -484,6 +484,15 @@
     
     
     
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------The End-------------</div>
+    
+</div>
+  
+</div>
     
     <div>
           
@@ -579,6 +588,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/11/20/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -598,6 +611,9 @@
 
           </div>
           
+
+  
+   <div id="gitalk-container"></div>
 
   
 
@@ -647,7 +663,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -655,6 +671,19 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -765,15 +794,14 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+ 
 
 
 
-  <span class="post-meta-divider">|</span>
 
 
 
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v6.5.0</div>
+
 
 
 
@@ -826,19 +854,14 @@
 
 
 
+
+
+
+
+
+
   
-    
-      
-        
-      
   
-  <script type="text/javascript" color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-
-
-
-
-
-
 
 
 
@@ -859,6 +882,16 @@
   
   
     <script type="text/javascript" src="https://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1.0.0/canvas_sphere.min.js"></script>
   
 
 
@@ -900,6 +933,22 @@
 
 
 
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '49c6e21be58cb3ac3d6d',
+          clientSecret: '839ea96c1b16586100234f72c5b40c369a755921',
+          repo: 'shiyajian.github.io',
+          owner: 'Shiyajian',
+          admin: ['shiyajian1991@gmail.com'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   

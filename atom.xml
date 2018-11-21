@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Shiyajian</title>
   
-  <subtitle>从来没有什么岁月静好，只是有人在负重前行</subtitle>
+  <subtitle>个人技术博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://shiyajian.github.io/"/>

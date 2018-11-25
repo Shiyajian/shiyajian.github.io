@@ -108,17 +108,20 @@
 
 
 
-  <meta name="description" content="从来没有什么岁月静好，只是有人在负重前行">
-<meta name="keywords" content="shiyajian,史亚健,java,spring,spring boot,spring cloud,微服务,分布式,大数据">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shiyajian">
-<meta property="og:url" content="http://shiyajian.github.io/index.html">
+  <meta name="description" content="Spring Cloud下使用Feign Form实现微服务之间的文件上传背景​    Spring Cloud现在已经被越来越多的公司采用了，微服务架构比传统意义上的单服务架构从复杂度上多了很多，出现了很多复杂的场景。比如，我们的产品是个app，支持第三方登录功能，在手机端调用第三方授权接口之后，返回了用户的相关信息，比如open_id，性别，头像等。这些信息我们需要保存在我们服务器上，当时针对">
+<meta name="keywords" content="spring cloud,feign">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Feign上传文件">
+<meta property="og:url" content="http://shiyajian.github.io/2018/11/25/使用Feign上传文件/index.html">
 <meta property="og:site_name" content="Shiyajian">
-<meta property="og:description" content="从来没有什么岁月静好，只是有人在负重前行">
+<meta property="og:description" content="Spring Cloud下使用Feign Form实现微服务之间的文件上传背景​    Spring Cloud现在已经被越来越多的公司采用了，微服务架构比传统意义上的单服务架构从复杂度上多了很多，出现了很多复杂的场景。比如，我们的产品是个app，支持第三方登录功能，在手机端调用第三方授权接口之后，返回了用户的相关信息，比如open_id，性别，头像等。这些信息我们需要保存在我们服务器上，当时针对">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/Shiyajian/examples/blob/master/public/images/chapter1-1.png">
+<meta property="og:updated_time" content="2018-11-25T12:03:02.087Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shiyajian">
-<meta name="twitter:description" content="从来没有什么岁月静好，只是有人在负重前行">
+<meta name="twitter:title" content="使用Feign上传文件">
+<meta name="twitter:description" content="Spring Cloud下使用Feign Form实现微服务之间的文件上传背景​    Spring Cloud现在已经被越来越多的公司采用了，微服务架构比传统意义上的单服务架构从复杂度上多了很多，出现了很多复杂的场景。比如，我们的产品是个app，支持第三方登录功能，在手机端调用第三方授权接口之后，返回了用户的相关信息，比如open_id，性别，头像等。这些信息我们需要保存在我们服务器上，当时针对">
+<meta name="twitter:image" content="https://github.com/Shiyajian/examples/blob/master/public/images/chapter1-1.png">
 
 
 
@@ -127,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://shiyajian.github.io/"/>
+  <link rel="canonical" href="http://shiyajian.github.io/2018/11/25/使用Feign上传文件/"/>
 
 
 
@@ -137,7 +140,7 @@
   };
 </script>
 
-  <title>Shiyajian</title>
+  <title>使用Feign上传文件 | Shiyajian</title>
   
 
 
@@ -186,8 +189,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     
     <a href="https://github.com/Shiyajian" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -230,7 +232,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -360,9 +362,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -394,10 +396,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/25/使用Feign上传文件/" class="post-title-link" itemprop="http://shiyajian.github.io/index.html">使用Feign上传文件</a>
+          <h1 class="post-title" itemprop="name headline">使用Feign上传文件
               
             
           </h1>
@@ -489,9 +488,7 @@
       
 
       
-        
-          
-            <h2 id="Spring-Cloud下使用Feign-Form实现微服务之间的文件上传"><a href="#Spring-Cloud下使用Feign-Form实现微服务之间的文件上传" class="headerlink" title="Spring Cloud下使用Feign Form实现微服务之间的文件上传"></a>Spring Cloud下使用Feign Form实现微服务之间的文件上传</h2><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>​    Spring Cloud现在已经被越来越多的公司采用了，微服务架构比传统意义上的单服务架构从复杂度上多了很多，出现了很多复杂的场景。比如，我们的产品是个app，支持第三方登录功能，在手机端调用第三方授权接口之后，返回了用户的相关信息，比如open_id，性别，头像等。这些信息我们需要保存在我们服务器上，当时针对头像是应该保存图片的url还是图片本身发生了歧义，在一番讨论之后，得出的结果是，我们需要通过url将图片下载到我们本地，然后调用我们自己的文件微服务中上传功能保存起来。</p>
+        <h2 id="Spring-Cloud下使用Feign-Form实现微服务之间的文件上传"><a href="#Spring-Cloud下使用Feign-Form实现微服务之间的文件上传" class="headerlink" title="Spring Cloud下使用Feign Form实现微服务之间的文件上传"></a>Spring Cloud下使用Feign Form实现微服务之间的文件上传</h2><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>​    Spring Cloud现在已经被越来越多的公司采用了，微服务架构比传统意义上的单服务架构从复杂度上多了很多，出现了很多复杂的场景。比如，我们的产品是个app，支持第三方登录功能，在手机端调用第三方授权接口之后，返回了用户的相关信息，比如open_id，性别，头像等。这些信息我们需要保存在我们服务器上，当时针对头像是应该保存图片的url还是图片本身发生了歧义，在一番讨论之后，得出的结果是，我们需要通过url将图片下载到我们本地，然后调用我们自己的文件微服务中上传功能保存起来。</p>
 <p>​    跨服务之间调用，我们采用的是Feign组件，原生的Feign组件并不支持文件上传，但是如果添加了Feign-Form模块，那么就能上传文件，下面我通过一篇文章来讲述如何通过Feign上传文件，代码已经上传github地址。</p>
 <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>个人博客首发： <a href="https://Shiyajian.github.io">https://Shiyajian.github.io</a></p>
 <p>github项目地址：<a href="https://github.com/Shiyajian/examples" target="_blank" rel="noopener">https://github.com/Shiyajian/examples</a> ，请找spring-cloud/chapter1</p>
@@ -601,8 +598,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
 
@@ -618,361 +613,95 @@
        
     
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Shiyajian 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Shiyajian 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Shiyajian</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://shiyajian.github.io/2018/11/25/使用Feign上传文件/" title="使用Feign上传文件">http://shiyajian.github.io/2018/11/25/使用Feign上传文件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://shiyajian.github.io/2018/11/21/test11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shiyajian">
-      <meta itemprop="description" content="从来没有什么岁月静好，只是有人在负重前行">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shiyajian">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/21/test11/" class="post-title-link" itemprop="http://shiyajian.github.io/index.html">test11</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-21 17:06:16 / 修改时间：17:07:07" itemprop="dateCreated datePublished" datetime="2018-11-21T17:06:16+08:00">2018-11-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hello/" itemprop="url" rel="index"><span itemprop="name">hello</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hello/world/" itemprop="url" rel="index"><span itemprop="name">world</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/spring-cloud/" rel="tag"><i class="fa fa-tag"></i> spring cloud</a>
           
-
+            <a href="/tags/feign/" rel="tag"><i class="fa fa-tag"></i> feign</a>
           
-            
-          
-
-          
-          
-             <span id="/2018/11/21/test11/" class="leancloud_visitors" data-flag-title="test11">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://shiyajian.github.io/2018/11/20/helloworld/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shiyajian">
-      <meta itemprop="description" content="从来没有什么岁月静好，只是有人在负重前行">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shiyajian">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/20/helloworld/" class="post-title-link" itemprop="http://shiyajian.github.io/index.html">helloworld</a>
-              
+              <a href="/2018/11/21/test11/" rel="next" title="test11">
+                <i class="fa fa-chevron-left"></i> test11
+              </a>
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-20 23:02:04" itemprop="dateCreated datePublished" datetime="2018-11-20T23:02:04+08:00">2018-11-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-11-21 16:46:50" itemprop="dateModified" datetime="2018-11-21T16:46:50+08:00">2018-11-21</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/11/20/helloworld/" class="leancloud_visitors" data-flag-title="helloworld">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ~/bin</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -982,14 +711,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1010,8 +740,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1152,6 +891,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud下使用Feign-Form实现微服务之间的文件上传"><span class="nav-number">1.</span> <span class="nav-text">Spring Cloud下使用Feign Form实现微服务之间的文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.0.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明"><span class="nav-number">1.0.2.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工具"><span class="nav-number">1.0.3.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目结构"><span class="nav-number">1.0.4.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置并运行"><span class="nav-number">1.0.5.</span> <span class="nav-text">配置并运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Provider-服务配置说明"><span class="nav-number">1.0.6.</span> <span class="nav-text">Provider 服务配置说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.0.7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#意外"><span class="nav-number">1.0.8.</span> <span class="nav-text">意外</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">1.0.9.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -1286,6 +1041,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -1320,43 +1079,40 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -1376,9 +1132,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });

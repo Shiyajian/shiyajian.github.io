@@ -111,17 +111,17 @@
   <meta name="description" content="背景​    上次在群中，有个群友说自己把所有项目中，所有使用占位符打印日志的方式都修改成为了字符串拼接的方式，因为他曾经看了一篇文章，说字符串拼接的形式比占位符形式的性能更好，这个话题引起了大家的广泛讨论。 ​    在我印象中，我记得曾经看过的文章说，占位符的方式性能好，因为如果不打日志的话，就不会进行字符串拼接，节省性能。最后抱着一探究竟的心态，我进行了一次日志输出方式的实验。 工具IDEA">
 <meta name="keywords" content="spring-boot,log">
 <meta property="og:type" content="article">
-<meta property="og:title" content="log-cost-time">
+<meta property="og:title" content="Java日志格式应该是占位符还是字符串拼接">
 <meta property="og:url" content="http://shiyajian.github.io/2018/12/17/Java日志格式应该是占位符还是字符串拼接/index.html">
 <meta property="og:site_name" content="Shiyajian">
 <meta property="og:description" content="背景​    上次在群中，有个群友说自己把所有项目中，所有使用占位符打印日志的方式都修改成为了字符串拼接的方式，因为他曾经看了一篇文章，说字符串拼接的形式比占位符形式的性能更好，这个话题引起了大家的广泛讨论。 ​    在我印象中，我记得曾经看过的文章说，占位符的方式性能好，因为如果不打日志的话，就不会进行字符串拼接，节省性能。最后抱着一探究竟的心态，我进行了一次日志输出方式的实验。 工具IDEA">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/Shiyajian/examples/blob/master/public/images/log.png">
-<meta property="og:updated_time" content="2018-12-17T14:38:21.697Z">
+<meta property="og:image" content="https://shiyajian.github.io/images/log.png">
+<meta property="og:updated_time" content="2018-12-17T14:44:35.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="log-cost-time">
+<meta name="twitter:title" content="Java日志格式应该是占位符还是字符串拼接">
 <meta name="twitter:description" content="背景​    上次在群中，有个群友说自己把所有项目中，所有使用占位符打印日志的方式都修改成为了字符串拼接的方式，因为他曾经看了一篇文章，说字符串拼接的形式比占位符形式的性能更好，这个话题引起了大家的广泛讨论。 ​    在我印象中，我记得曾经看过的文章说，占位符的方式性能好，因为如果不打日志的话，就不会进行字符串拼接，节省性能。最后抱着一探究竟的心态，我进行了一次日志输出方式的实验。 工具IDEA">
-<meta name="twitter:image" content="https://github.com/Shiyajian/examples/blob/master/public/images/log.png">
+<meta name="twitter:image" content="https://shiyajian.github.io/images/log.png">
 
 
 
@@ -140,7 +140,7 @@
   };
 </script>
 
-  <title>log-cost-time | Shiyajian</title>
+  <title>Java日志格式应该是占位符还是字符串拼接 | Shiyajian</title>
   
 
 
@@ -396,7 +396,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">log-cost-time
+          <h1 class="post-title" itemprop="name headline">Java日志格式应该是占位符还是字符串拼接
               
             
           </h1>
@@ -421,7 +421,7 @@
                 
               
 
-              <time title="创建时间：2018-12-17 22:01:57 / 修改时间：22:38:21" itemprop="dateCreated datePublished" datetime="2018-12-17T22:01:57+08:00">2018-12-17</time>
+              <time title="创建时间：2018-12-17 22:01:57 / 修改时间：22:44:35" itemprop="dateCreated datePublished" datetime="2018-12-17T22:01:57+08:00">2018-12-17</time>
             
 
             
@@ -457,7 +457,7 @@
 
           
           
-             <span id="/2018/12/17/Java日志格式应该是占位符还是字符串拼接/" class="leancloud_visitors" data-flag-title="log-cost-time">
+             <span id="/2018/12/17/Java日志格式应该是占位符还是字符串拼接/" class="leancloud_visitors" data-flag-title="Java日志格式应该是占位符还是字符串拼接">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -494,7 +494,7 @@
 <h2 id="测试方式"><a href="#测试方式" class="headerlink" title="测试方式"></a>测试方式</h2><p>本次测试我定义了4个方法，每个方法同时打印 DEBUG ，INFO 日志，默认日志级别是INFO级别的，所有DEBUG级别日志是不输出的，这样可以检测输出的日志会不会被不输出级别日志影响，同时我还给部分方法增加了if判断，这个是为了测试，我们是否有必要显性的进行日志级别的操作，具体代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">record</span><span class="params">(LogEntity logEntity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (log.isDebugEnabled()) &#123;</span><br><span class="line">               log.debug(<span class="string">"id:&#123;&#125;,name:&#123;&#125;,ip:&#123;&#125;,url:&#123;&#125;,params:&#123;&#125;"</span>,</span><br><span class="line">                       logEntity.getId(),</span><br><span class="line">                       logEntity.getName(),</span><br><span class="line">                       logEntity.getId(),</span><br><span class="line">                       logEntity.getUrl(),</span><br><span class="line">                       logEntity.getParams());</span><br><span class="line">           &#125;</span><br><span class="line">           log.info(<span class="string">"id:&#123;&#125;,name:&#123;&#125;,ip:&#123;&#125;,url:&#123;&#125;,params:&#123;&#125;"</span>,</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getName(),</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getUrl(),</span><br><span class="line">                   logEntity.getParams());</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">record1</span><span class="params">(LogEntity logEntity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">           log.debug(<span class="string">"id:&#123;&#125;,name:&#123;&#125;,ip:&#123;&#125;,url:&#123;&#125;,params:&#123;&#125;"</span>,</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getName(),</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getUrl(),</span><br><span class="line">                   logEntity.getParams());</span><br><span class="line">           log.info(<span class="string">"id:&#123;&#125;,name:&#123;&#125;,ip:&#123;&#125;,url:&#123;&#125;,params:&#123;&#125;"</span>,</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getName(),</span><br><span class="line">                   logEntity.getId(),</span><br><span class="line">                   logEntity.getUrl(),</span><br><span class="line">                   logEntity.getParams());</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">record2</span><span class="params">(LogEntity logEntity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">           <span class="keyword">if</span> (log.isDebugEnabled()) &#123;</span><br><span class="line">               log.debug(<span class="string">"id:"</span> + logEntity.getId() +</span><br><span class="line">                       <span class="string">",name:"</span> + logEntity.getName() +</span><br><span class="line">                       <span class="string">",ip:"</span> + logEntity.getId() +</span><br><span class="line">                       <span class="string">",url:"</span> + logEntity.getUrl() +</span><br><span class="line">                       <span class="string">",params:"</span> + logEntity.getParams());</span><br><span class="line">           &#125;</span><br><span class="line">           log.info(<span class="string">"id:"</span> + logEntity.getId() +</span><br><span class="line">                   <span class="string">",name:"</span> + logEntity.getName() +</span><br><span class="line">                   <span class="string">",ip:"</span> + logEntity.getId() +</span><br><span class="line">                   <span class="string">",url:"</span> + logEntity.getUrl() +</span><br><span class="line">                   <span class="string">",params:"</span> + logEntity.getParams());</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">record3</span><span class="params">(LogEntity logEntity)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">           log.debug(<span class="string">"id:"</span> + logEntity.getId() +</span><br><span class="line">                     <span class="string">",name:"</span> + logEntity.getName() +</span><br><span class="line">                     <span class="string">",ip:"</span> + logEntity.getId() +</span><br><span class="line">                     <span class="string">",url:"</span> + logEntity.getUrl() +</span><br><span class="line">                     <span class="string">",params:"</span> + logEntity.getParams());</span><br><span class="line">           log.info(<span class="string">"id:"</span> + logEntity.getId() +</span><br><span class="line">                   <span class="string">",name:"</span> + logEntity.getName() +</span><br><span class="line">                   <span class="string">",ip:"</span> + logEntity.getId() +</span><br><span class="line">                   <span class="string">",url:"</span> + logEntity.getUrl() +</span><br><span class="line">                   <span class="string">",params:"</span> + logEntity.getParams());</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><p>我运行了6次Junit测试用例，结果如下：</p>
-<p><img src="https://github.com/Shiyajian/examples/blob/master/public/images/log.png" alt="log"></p>
+<p><img src="https://shiyajian.github.io/images/log.png" alt="log"></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>通过测试结果可以有以下发现：</p>
 <ul>
 <li><p>字符串拼接的方法，大部分下情况性能高于占位符</p>
@@ -577,7 +577,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://shiyajian.github.io/2018/12/17/Java日志格式应该是占位符还是字符串拼接/" title="log-cost-time">http://shiyajian.github.io/2018/12/17/Java日志格式应该是占位符还是字符串拼接/</a>
+    <a href="http://shiyajian.github.io/2018/12/17/Java日志格式应该是占位符还是字符串拼接/" title="Java日志格式应该是占位符还是字符串拼接">http://shiyajian.github.io/2018/12/17/Java日志格式应该是占位符还是字符串拼接/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
